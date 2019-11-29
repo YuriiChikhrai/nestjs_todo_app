@@ -7,6 +7,17 @@ export class AppController {
 
   @Get()
   getHello(): string {
-    return 'Hillel TODO-APP backend';
+    return `
+      <html>
+        <head>
+          <title>
+            Hillel TODO-APP backend
+          </title>
+        </head>
+        <body>
+          <h1>Here will be documentation to work with service</h1>
+        </body>
+      </html>
+    `;
   }
 }

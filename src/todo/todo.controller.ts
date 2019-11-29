@@ -9,16 +9,20 @@ import {
   Put,
   UsePipes,
   ValidationPipe,
+  UseGuards,
 } from '@nestjs/common';
 import { TodoService } from './todo.service';
 import { createTodoDto } from './dto/create_todo.dto';
+import { AuthGuard } from '@nestjs/passport';
+import { CurrentUser } from '../decorators/current_user';
 
+@UseGuards(AuthGuard('jwt'))
 @Controller('todo')
 export class TodoController {
   constructor(private readonly todoService: TodoService) {}
 
   @Get()
-  getTodoList() {
+  getTodoList(@CurrentUser() user: string) {
     return this.todoService.getTodoList();
   }
 
