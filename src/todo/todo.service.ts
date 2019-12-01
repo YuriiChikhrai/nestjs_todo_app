@@ -1,28 +1,28 @@
-import { Injectable } from '@nestjs/common';
-import { TodoModel } from './todo.model';
+import { Injectable, Inject } from '@nestjs/common';
 import { createTodoDto } from './dto/create_todo.dto';
+import { TodoRepository } from './todo.repository';
 
 @Injectable()
 export class TodoService {
-  constructor(private readonly todoModel: TodoModel) {}
+  constructor(private readonly todoRepository: TodoRepository) {}
 
-  getTodoList(user?: string) {
-    return this.todoModel.getList(user);
+  getTodoList(user: string) {
+    return this.todoRepository.getList(user);
   }
 
   addTodo(body: createTodoDto, user: string) {
-    return this.todoModel.addTask({ ...body, user });
+    return this.todoRepository.addTask(body.value, user);
   }
 
   removeTodo(id: number, user: string) {
-    return this.todoModel.removeTask(id, user);
+    return this.todoRepository.removeTask(id, user);
   }
 
   updateTodo(id: number, user: string, data: createTodoDto) {
-    return this.todoModel.updateTask(id, user, data);
+    return this.todoRepository.updateTask(id, user, data);
   }
 
   toggleTodo(id: number, user: string) {
-    return this.todoModel.toggleTask(id, user);
+    return this.todoRepository.toggleTask(id, user);
   }
 }

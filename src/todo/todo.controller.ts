@@ -23,19 +23,25 @@ export class TodoController {
 
   @Get()
   getTodoList(@CurrentUser() user: string) {
-    return this.todoService.getTodoList();
+    return this.todoService.getTodoList(user);
   }
 
   @Post()
   @UsePipes(new ValidationPipe({ whitelist: true }))
-  addTodoTask(@Body() createTodoDto: createTodoDto) {
-    return this.todoService.addTodo(createTodoDto, 'test');
+  addTodoTask(
+    @CurrentUser() user: string,
+    @Body() createTodoDto: createTodoDto,
+  ) {
+    return this.todoService.addTodo(createTodoDto, user);
   }
 
   @Delete('/:id')
   @UsePipes(new ValidationPipe({ whitelist: true }))
-  delteTodoTask(@Param('id', ParseIntPipe) id: number) {
-    return this.todoService.removeTodo(id, 'test');
+  delteTodoTask(
+    @CurrentUser() user: string,
+    @Param('id', ParseIntPipe) id: number,
+  ) {
+    return this.todoService.removeTodo(id, user);
   }
 
   @Put('/:id')
@@ -43,8 +49,9 @@ export class TodoController {
   updateTodoTask(
     @Param('id', ParseIntPipe) id: number,
     @Body() data: createTodoDto,
+    @CurrentUser() user: string,
   ) {
-    return this.todoService.updateTodo(id, 'test', data);
+    return this.todoService.updateTodo(id, user, data);
   }
 
   @Put('/:id/toggle')
