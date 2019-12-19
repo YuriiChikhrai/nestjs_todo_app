@@ -9,11 +9,17 @@ import {
 import { receiveLoginDto } from './dto/generate_jwt_dto';
 import { AuthService } from './auth.service';
 import { Request } from 'express';
+import { ApiTags, ApiResponse } from '@nestjs/swagger';
 
+@ApiTags('auth')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  @ApiResponse({
+    status: 200,
+    description: 'Token to set inside authorization header',
+  })
   @Post('/login')
   @UsePipes(new ValidationPipe({ whitelist: true }))
   generateJwt(@Body() body: receiveLoginDto, @Req() req: Request) {
