@@ -15,9 +15,22 @@ export class TodoRepository extends Repository<TODO> {
     return task.save();
   }
 
-  public removeTask(id: number, user: string) {}
+  public removeTask(id: number, user: string) {
+    // TODO: more pretty response
+    return this.delete({ _id: id, user });
+  }
 
-  public updateTask(id: number, user: string, data: any) {}
+  public updateTask(id: number, user: string, data: any) {
+    // TODO:
+  }
 
-  public toggleTask(id: number, user: string) {}
+  public async toggleTask(id: number, user: string) {
+    const task: TODO = await this.findOneOrFail({ user, _id: id });
+    task.checked = !task.checked;
+
+    // TODO: maybe typeorm do it itself?
+    task.updatedAt = new Date();
+
+    return task.save();
+  }
 }

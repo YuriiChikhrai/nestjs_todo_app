@@ -16,6 +16,12 @@ async function bootstrap() {
       .setDescription('TODO API description')
       .setVersion('1.0')
       .addTag('todo')
+      .addSecurity('bearer', {
+        type: 'http',
+        scheme: 'bearer',
+        description: 'JWT Authorization',
+        bearerFormat: 'Bearer ',
+      })
       .build(),
   );
   SwaggerModule.setup('/', app, document);

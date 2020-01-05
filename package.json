@@ -28,11 +28,11 @@
     "@nestjs/jwt": "^6.1.1",
     "@nestjs/passport": "^6.1.1",
     "@nestjs/platform-express": "^6.10.14",
-    "@nestjs/swagger": "4.0.9",
+    "@nestjs/swagger": "^4.0.9",
     "@nestjs/typeorm": "^6.2.0",
     "app-root-path": "^3.0.0",
     "class-transformer": "^0.2.3",
-    "class-validator": "^0.10.2",
+    "class-validator": "^0.11.0",
     "crypto-random-string": "^3.0.1",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
@@ -40,12 +40,12 @@
     "rimraf": "^3.0.0",
     "rxjs": "^6.5.3",
     "sqlite3": "^4.1.0",
-    "swagger-ui-express": "4.1.2",
-    "typeorm": "^0.2.20"
+    "swagger-ui-express": "^4.1.2",
+    "typeorm": "^0.2.22"
   },
   "devDependencies": {
     "@nestjs/cli": "^6.12.9",
-    "@nestjs/schematics": "^6.7.6",
+    "@nestjs/schematics": "^6.8.0",
     "@nestjs/testing": "^6.7.1",
     "@types/app-root-path": "^1.2.4",
     "@types/compression": "^1.0.1",
@@ -62,7 +62,7 @@
     "ts-node": "^8.5.4",
     "tsconfig-paths": "^3.9.0",
     "tslint": "^5.20.0",
-    "typescript": "^3.6.3"
+    "typescript": "^3.7.4"
   },
   "jest": {
     "moduleFileExtensions": [

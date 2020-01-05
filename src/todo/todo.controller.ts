@@ -15,16 +15,10 @@ import { TodoService } from './todo.service';
 import { createTodoDto } from './dto/create_todo.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { CurrentUser } from '../decorators/current_user';
-import { ApiTags, ApiHeader } from '@nestjs/swagger';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 
 @ApiTags('todo')
-@ApiHeader({
-  name: 'Authorization',
-  description: 'Auth token',
-  required: true,
-  example:
-    'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoieXVyYSIsImJyb3dzZXIiOiJQb3N0bWFuUnVudGltZS83LjIwLjEiLCJpcCI6Ijo6MSIsImlzc3VlciI6Imh0dHBzOi8vdG9kby5oaWxsZWwuaXQiLCJtYXhBZ2UiOiI3ZCIsImlhdCI6MTU3NTI0MTgxMH0.BuNzt06wE559-gQNwZPSVKEKGZoMJxFjZdxZSI4SxtI',
-})
+@ApiBearerAuth()
 @UseGuards(AuthGuard('jwt'))
 @Controller('todo')
 export class TodoController {
@@ -65,7 +59,10 @@ export class TodoController {
 
   @Put('/:id/toggle')
   @UsePipes(new ValidationPipe({ whitelist: true }))
-  toggleTodoTask(@Param('id', ParseIntPipe) id: number) {
-    return this.todoService.toggleTodo(id, 'test');
+  toggleTodoTask(
+    @Param('id', ParseIntPipe) id: number,
+    @CurrentUser() user: string,
+  ) {
+    return this.todoService.toggleTodo(id, user);
   }
 }
