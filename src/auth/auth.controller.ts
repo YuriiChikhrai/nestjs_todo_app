@@ -18,7 +18,7 @@ export class AuthController {
 
   @ApiResponse({
     status: 200,
-    description: 'Token to set inside authorization header',
+    description: 'Token to set into "Authorization" header',
   })
   @Post('/login')
   @UsePipes(new ValidationPipe({ whitelist: true }))

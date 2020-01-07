@@ -22,8 +22,7 @@ export class AuthService {
     };
   }
 
-  // TODO: Typings
-  async checkToken(req: Request, payload: any) {
+  async checkToken(req: Request, payload: any): Promise<{ user: string }> {
     if (
       (req.headers['user-agent'] === payload.browser,
       payload.ip === req.ip || payload.ip === JSON.stringify(req.ips))
