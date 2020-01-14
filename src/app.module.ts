@@ -21,7 +21,7 @@ import { TODO } from './todo/todo.entity';
       database: join(path, 'data', 'db.sqlite'),
       entities: [TODO],
       synchronize: true,
-      logging: 'all',
+      logging: process.env.NODE_ENV !== 'production' ? 'all' : false,
     }),
     PassportModule.register({ defaultStrategy: 'jwt' }),
     TodoModule,
@@ -39,9 +39,9 @@ export class AppModule implements NestModule {
       },
     });
     CompressionMiddleware.configure({});
-    // TODO: configure
     CorsMiddleware.configure({
-      origin: 'localhost',
+      origin:
+        process.env.NODE_ENV !== 'production' ? 'localhost' : 'todo.hillel.it',
       methods: ['GET', 'POST', 'PUT', 'DELETE'],
       credentials: true,
       allowedHeaders: ['Content-Type', 'Authorization', 'Accept-Encoding'],
